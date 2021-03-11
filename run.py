@@ -1,4 +1,4 @@
-import requests, re, base64,datetime,time
+import requests, re, base64,datetime,time,os
 TG_USER_ID = ''             # telegram 用户ID
 def seal():
     result=requests.post(url='http://api.sealnet.cf:8080/seal/getSsrLines',data={'seed':(None,'983376297')})
