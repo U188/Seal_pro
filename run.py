@@ -38,6 +38,8 @@ def main():
             ssr='ssr://'+base64.b64encode(s.encode('utf-8')).decode()
             with open(str(datetime.date.today())+'.txt','a') as f:
                 f.write(ssr+'\n')
+            time.sleep(2)
+            telegram_bot('seal','推送完成')
     except Exception as e:
         print(e)
 def telegram_bot(title, content):
@@ -50,10 +52,10 @@ def telegram_bot(title, content):
         print("Telegram推送的tg_bot_token或者tg_user_id未设置!!\n取消推送")
         return
     print("Telegram 推送开始")
-    #send_data = {"chat_id": tg_user_id, "text": title +'\n\n'+content, "disable_web_page_preview": "true"}
+    send_data = {"chat_id": tg_user_id, "text": title +'\n\n'+content, "disable_web_page_preview": "true"}
+    files={'file_name':str(datetime.date.today())+'.txt'}
     response = requests.post(
-        url='https://api.telegram.org/bot%s/sendMessage' % (tg_bot_token), file=str(datetime.date.today())+'.txt')
+        url='https://api.telegram.org/bot%s/sendMessage' % (tg_bot_token), data=send_data,file=files)
     print(response.text)
-
 if __name__ == '__main__':
     main()
