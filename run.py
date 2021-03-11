@@ -53,9 +53,9 @@ def telegram_bot(title, content):
         return
     print("Telegram 推送开始")
     send_data = {"chat_id": tg_user_id, "text": title +'\n\n'+content, "disable_web_page_preview": "true"}
-    files={'file_name':str(datetime.date.today())+'.txt'}
+    
     response = requests.post(
-        url='https://api.telegram.org/bot%s/sendMessage' % (tg_bot_token), data=send_data,file=files)
+        url='https://api.telegram.org/bot%s/sendMessage' % (tg_bot_token), data=send_data)
     print(response.text)
 if __name__ == '__main__':
     main()
