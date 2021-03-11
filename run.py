@@ -48,9 +48,9 @@ def main():
             # f.write(ssr+'\n')
             # time.sleep(2)
             ssr = ssr + '\n'
-            m=''
-            m+=ssr
-        return m
+            a=''
+            a+=ssr
+        return a
             
     except Exception as e:
         print(e)
@@ -75,4 +75,4 @@ def telegram_bot(title, content):
 
 if __name__ == '__main__':
     m=main()
-    telegram_bot('seal'+str(datetime.date.today()), m)
+    telegram_bot('seal-'+str(datetime.date.today()), a)
