@@ -39,7 +39,7 @@ def main():
             with open(str(datetime.date.today())+'.txt','a') as f:
                 f.write(ssr+'\n')
             time.sleep(2)
-            telegram_bot('seal','推送完成')
+            telegram_bot('seal',ssr)
     except Exception as e:
         print(e)
 def telegram_bot(title, content):
