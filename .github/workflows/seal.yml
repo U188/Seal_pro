@@ -30,7 +30,7 @@ jobs:
         run: pip3.7 install -r requirements.txt
       - name: 'Working'
         run: |
-          python3.7 tizi.py
+          python3.7 run.py
         env:
           START: ${{secrets.START}} # tg通知token
           TG_USER_ID:  ${{secrets.TG_USER_ID}}    # tg通知id
