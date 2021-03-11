@@ -36,10 +36,12 @@ def main():
             password = re.findall(r'(?<=password:).+(?=,obfs:plain)', m)[0]
             s=host+':'+port+':'+protocol+':none:'+obfs+':'+base64.b64encode(password.encode('utf-8')).decode()+'/?remarks='+base64.b64encode(name.encode('utf-8')).decode()+'&protoplasm=&obfsparam='
             ssr='ssr://'+base64.b64encode(s.encode('utf-8')).decode()
-            with open(str(datetime.date.today())+'.txt','a') as f:
-                f.write(ssr+'\n')
-            time.sleep(2)
-            telegram_bot('seal',str(datetime.date.today())+'.txt'.read())
+            return ssr
+            #with open(str(datetime.date.today())+'.txt','a') as f:
+                #f.write(ssr+'\n')
+            #time.sleep(2)
+         ssr=ssr+'\n'
+         telegram_bot('seal',ssr)
     except Exception as e:
         print(e)
 def telegram_bot(title, content):
