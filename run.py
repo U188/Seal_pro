@@ -42,13 +42,16 @@ def main():
             s = host + ':' + port + ':' + protocol + ':none:' + obfs + ':' + base64.b64encode(
                 password.encode('utf-8')).decode() + '/?remarks=' + base64.b64encode(
                 name.encode('utf-8')).decode() + '&protoplasm=&obfsparam='
+            #print(s)
             ssr = 'ssr://' + base64.b64encode(s.encode('utf-8')).decode()
             # with open(str(datetime.date.today())+'.txt','a') as f:
             # f.write(ssr+'\n')
             # time.sleep(2)
             ssr = ssr + '\n'
-            #print(ssr)
-            telegram_bot('seal', ssr)
+            m=''
+            m+=ssr
+            #print(m)
+        telegram_bot('seal', m)
     except Exception as e:
         print(e)
 
