@@ -13,6 +13,7 @@ def seal():
 
 
 def main():
+    a=''
     text = seal()
     url = 'https://www.ssleye.com/des/web_aes_decrypt'
     header = {
@@ -48,8 +49,8 @@ def main():
             # f.write(ssr+'\n')
             # time.sleep(2)
             ssr = ssr + '\n'
-            a=''
-            a+=ssr
+            
+            a=a+ssr
         return a
             
     except Exception as e:
