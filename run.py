@@ -74,5 +74,5 @@ def telegram_bot(title, content):
 
 
 if __name__ == '__main__':
-    m=main()
+    a=main()
     telegram_bot('seal-'+str(datetime.date.today()), a)
