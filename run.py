@@ -100,4 +100,7 @@ def telegram_bot(title, content):
 
 if __name__ == '__main__':
     a=main()
-    telegram_bot('seal-'+str(datetime.date.today()), a)
+    #telegram_bot('seal-'+str(datetime.date.today()), a)
+    time.sleep(1)
+    sendEmail()
+    
