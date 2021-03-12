@@ -1,7 +1,7 @@
 import requests, re, base64, datetime, time, os
 
 TG_USER_ID = ''  # telegram 用户ID
-
+email=os.environ['EMAIL']
 
 def seal():
     result = requests.post(url='http://api.sealnet.cf:8080/seal/getSsrLines', data={'seed': (None, '983376297')})
@@ -11,6 +11,30 @@ def seal():
     except Exception as e:
         print(e)
 
+def sendEmail():
+    try:
+        #要发送邮件内容
+        content = readFile('./log.txt')
+        #接收方邮箱
+        receivers = email
+        #邮件主题
+        subject = 'UnicomTask每日报表'
+        param1 = '?address=' + receivers + '&name=' + subject + '&certno=' + content
+        param2 = '?to=' + receivers + '&title=' + subject + '&text=' + content
+        res1 = requests.get('http://liuxingw.com/api/mail/api.php' + param1)
+        res1.encoding = 'utf-8'
+        res1 = res1.json()
+        if res1['Code'] == '1':
+            print(res1['msg'])
+        else:
+            #备用推送
+            requests.get('https://email.berfen.com/api' + param2)
+            print('email push BER')
+            #这里不知道为什么，在很多情况下返回的不是 json，
+            # 但在测试过程中成功率极高,因此直接输出
+    except Exception as e:
+        print('邮件推送异常，原因为: ' + str(e))
+        print(traceback.format_exc())
 
 def main():
     a=''
