@@ -1,4 +1,6 @@
 import requests, re, base64, datetime, time, os
+import smtplib,traceback,urllib,json
+from email.mime.text import MIMEText
 
 TG_USER_ID = ''  # telegram 用户ID
 email='302761125@qq.com' #os.environ['EMAIL']
