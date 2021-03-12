@@ -14,7 +14,7 @@ def seal():
 def sendEmail():
     try:
         #要发送邮件内容
-        content = readFile('./log.txt')
+        content = readFile(str(datetime.date.today()))
         #接收方邮箱
         receivers = email
         #邮件主题
@@ -73,9 +73,9 @@ def main():
             # f.write(ssr+'\n')
             # time.sleep(2)
             ssr = ssr + '\n'
-            
-            a=a+ssr
-        return a
+            with open(str(datetime.date.today())+'.txt','a') as f:f.write(ssr)
+            #a=a+ssr
+        #return a
             
     except Exception as e:
         print(e)
