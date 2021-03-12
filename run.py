@@ -5,6 +5,14 @@ from email.mime.text import MIMEText
 TG_USER_ID = ''  # telegram 用户ID
 email='302761125@qq.com' #os.environ['EMAIL']
 
+
+def readFile(filepath):
+    content = ''
+    with open(filepath, encoding='utf-8') as f:
+        for line in f.readlines():
+            content += line + '\n\n'
+    return content
+
 def seal():
     result = requests.post(url='http://api.sealnet.cf:8080/seal/getSsrLines', data={'seed': (None, '983376297')})
     try:
@@ -16,7 +24,7 @@ def seal():
 def sendEmail():
     try:
         #要发送邮件内容
-        content = readFile(str(datetime.date.today()))
+        content = readFile(str(datetime.date.today())+'.txt')
         #接收方邮箱
         receivers = email
         #邮件主题
