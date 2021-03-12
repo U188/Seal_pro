@@ -33,5 +33,6 @@ jobs:
           python3.7 run.py
         env:
           START: ${{secrets.START}} # tg通知token
+          TG_BOT_TOKRN:  ${{secrets.TG_BOT_TOKEN}}# tg通知id
           TG_USER_ID:  ${{secrets.TG_USER_ID}}    # tg通知id
           INVITECODE: ${{SECRETS.INVITECODE}}
