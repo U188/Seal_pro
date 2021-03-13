@@ -29,7 +29,7 @@ def send_email():
     subject = '邮件'
     message['Subject'] = Header(subject, 'utf-8')  # 邮件主题
     # 邮件正文内容
-    message.attach(MIMEText('Seal', 'plain', 'utf-8'))
+    message.attach(MIMEText('seal最新--'+str(datetime.date.today(), 'plain', 'utf-8'))
     # 构造附件1，传送当前目录下的 test.txt 文件
     att1 = MIMEText(open(str(datetime.date.today())+'.txt', 'rb').read(), 'base64', 'utf-8')
     att1["Content-Type"] = 'application/octet-stream'
