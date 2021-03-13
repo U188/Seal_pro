@@ -2,7 +2,7 @@ name: seal
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '0 5 */10 * *'
   watch:
     types: [started]
   # Allows you to run this workflow manually from the Actions tab
@@ -32,7 +32,6 @@ jobs:
         run: |
           python3.7 run.py
         env:
-          START: ${{secrets.START}} # tg通知token
-          TG_BOT_TOKEN:  ${{secrets.TG_BOT_TOKEN}}
-          TG_USER_ID:  ${{secrets.TG_USER_ID}}    # tg通知id
-          INVITECODE: ${{SECRETS.INVITECODE}}
+          PASSWORD: ${{secrets.PASSWORD}}
+          GET_EMAIL:  ${{secrets.GET_EMAIL}}
+          POST_EMAIL:  ${{secrets.POST_EMAIL}}
