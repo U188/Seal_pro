@@ -290,16 +290,16 @@ class WoMailCheckIn:
             if cookies:
                 msg = self.dotask(cookies)
                 msg1 = self.dotask2(womail_url)
-                msg += f"\n【沃邮箱俱乐部】\n{msg1}"
-                pushplus_bot(title, msg)
+                msg += f"\n【沃邮箱俱乐部】\n{msg1}\n"
+                #pushplus_bot(title, msg)
             else:
                 msg = "登录失败"
-                pushplus_bot(title, msg)
+                #pushplus_bot(title, msg)
         except Exception as e:
             print(e)
             msg = "登录失败"
             pushplus_bot(title, msg)
-        return msg
+        return msg,title
 
 #定义pushplus推送
 def pushplus_bot(title, content):
@@ -333,9 +333,13 @@ def pushplus_bot(title, content):
 def main_handler(event, context):
 	urll=os.environ["womail"]
 	url=urll.split(",")
+	s=''
 	for i in url:
 		keyurl = {"womail_url": f"{i}"}
-		print(WoMailCheckIn(check_item=keyurl).main())
+		msg,title=WoMailCheckIn(check_item=keyurl).main()
+		s+=msg
+		pushplus_bot(title, s)
+
 
 
 if __name__ == '__main__':
