@@ -338,7 +338,7 @@ def main_handler(event, context):
 		keyurl = {"womail_url": f"{i}"}
 		msg,title=WoMailCheckIn(check_item=keyurl).main()
 		s+=msg
-		pushplus_bot(title, s)
+	pushplus_bot(title, s)
 
 
 
