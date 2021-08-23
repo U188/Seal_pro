@@ -3,7 +3,7 @@ import re, json, requests,os
 
 # --------------以下为配置区需自行填写--------------#
 #填写pushplus的推送
-PUSH_PLUS_TOKEN = 'f474cad8f2f64a4590719a985fb229dc'
+PUSH_PLUS_TOKEN = '9e3f47b7e9dc47c6b7d4966851fc597b'
 
 #填写在沃邮箱公众号抓取的url
 
