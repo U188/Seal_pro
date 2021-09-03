@@ -1,3 +1,9 @@
+'''
+[task_local]
+#东东工厂
+15 14,20 * * * reward.py, tag=宠替换
+'''
+
 import requests, re, json, os,datetime
 def nowtime():
 	h=datetime.datetime.now().strftime('%H')
