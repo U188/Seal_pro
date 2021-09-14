@@ -110,7 +110,7 @@ class WoMailCheckIn:
     def write_if_checkin(self,continuousDay):
 
         with open(
-                    os.path.join(os.path.dirname(os.path.dirname(__file__)), "womail/if_checkin.txt"), mode="w",
+                    os.path.join(os.path.dirname(os.path.dirname(__file__)), "if_checkin.txt"), mode="w",
                     encoding="utf-8"
             ) as f:
                 f.write(continuousDay)
@@ -118,7 +118,7 @@ class WoMailCheckIn:
     def read_if_checkin(self):
 
         with open(
-                    os.path.join(os.path.dirname(os.path.dirname(__file__)), "womail/if_checkin.txt"), mode="r",
+                    os.path.join(os.path.dirname(os.path.dirname(__file__)), "if_checkin.txt"), mode="r",
                     encoding="utf-8"
             ) as f:
                 return f.read()
