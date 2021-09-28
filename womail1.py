@@ -154,11 +154,7 @@ class WoMailCheckIn:
                     userMobile = result.get("userPhoneNum")
                     userdata = f"帐号信息: {userMobile[:3]}****{userMobile[-4:]} - 当前积分:{integralTotal}\n"
                     msg += userdata
-                    curl="https://sc.mail.wo.cn/ecp-web-mobile/luckDraw/instantDraw"
-                    res = requests.get(url=curl, headers=headers)
-                    result = res.json()
-                    desc=result['values']['desc']
-                    msg+=f'感恩季抽奖结果：{desc}'
+                    
                     # url_params = {
                     #     "每日签到": "https://club.mail.wo.cn/clubwebservice/club-user/user-sign/create",
                     #     "参与活动": f"https://club.mail.wo.cn/clubwebservice/growth/addIntegral?phoneNum={userMobile}&resourceType=huodong",
