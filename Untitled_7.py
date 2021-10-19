@@ -194,45 +194,7 @@ def doTask(cookie):
         return
     for merch in merch_list:
         sign_in(cookie,merch)
-
-
-## 获取通知服务
-class Msg(object):
-    def getsendNotify(self, a=1):
-        try:
-            url = 'https://ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
-            response = requests.get(url)
-            with open('sendNotify.py', "w+", encoding="utf-8") as f:
-                f.write(response.text)
-            return
-        except:
-            pass
-        if a < 5:
-            a += 1
-            return self.getsendNotify(a)
-
-    def main(self):
-        global send,msg,initialize
-        cur_path = os.path.abspath('.')
-        sys.path.append(cur_path)
-        for n in range(3):
-            if os.path.exists(cur_path + "/sendNotify.py"):
-                try:
-                    from sendNotify import send,msg,initialize
-                    break
-                except:
-                    self.getsendNotify()
-            else:
-                self.getsendNotify()
-        l=['BARK','PUSH_KEY','TG_BOT_TOKEN','TG_USER_ID','TG_API_HOST','TG_PROXY_HOST','TG_PROXY_PORT','DD_BOT_TOKEN','DD_BOT_SECRET','QQ_SKEY','Q_SKEY','QQ_MODE','QYWX_AM','PUSH_PLUS_TOKEN']
-        d={}
-        for a in l:
-            try:
-                d[a]=eval(a)
-            except:
-                d[a]=''
-        initialize(d)   # 初始化        
-Msg().main()   # 初始化通知服务 
+ 
 
 if __name__ == '__main__':
     msg('🔔签到免单，开始！\n')
@@ -244,4 +206,3 @@ if __name__ == '__main__':
         pin=cookie_match.match(cookie).group(2)
         msg(f'******开始【账号 {e}】 {pin} *********\n')
         doTask(cookie)
-    send('### 签到免单 ###')   # 启用通知服务
