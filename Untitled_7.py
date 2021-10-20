@@ -197,7 +197,7 @@ def doTask(cookie):
  
 
 if __name__ == '__main__':
-    msg('🔔签到免单，开始！\n')
+    #msg('🔔签到免单，开始！\n')
     ua=ua_random()
     cookie_list=Judge_env().main_run()
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
