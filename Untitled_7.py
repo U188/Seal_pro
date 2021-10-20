@@ -184,6 +184,43 @@ def getUserInfo(cookie):
         msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
     return False
 
+## 获取通知服务
+class Msg(object):
+    def getsendNotify(self, a=1):
+        try:
+            url = 'https://ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
+            response = requests.get(url,timeout=3)
+            with open('sendNotify.py', "w+", encoding="utf-8") as f:
+                f.write(response.text)
+            return
+        except:
+            pass
+        if a < 5:
+            a += 1
+            return self.getsendNotify(a)
+
+    def main(self):
+        global send,msg,initialize
+        sys.path.append(os.path.abspath('.'))
+        for n in range(3):
+            try:
+                from sendNotify import send,msg,initialize
+                break
+            except:
+                self.getsendNotify()
+        l=['BARK','PUSH_KEY','TG_BOT_TOKEN','TG_USER_ID','TG_API_HOST','TG_PROXY_HOST','TG_PROXY_PORT','DD_BOT_TOKEN','DD_BOT_SECRET','QQ_SKEY','Q_SKEY','QQ_MODE','QYWX_AM','PUSH_PLUS_TOKEN']
+        d={}
+        for a in l:
+            try:
+                d[a]=eval(a)
+            except:
+                d[a]=''
+        try:
+            initialize(d)
+        except:
+            self.getsendNotify()
+            self.main()          
+Msg().main()   # 初始化通知服务 
 
 def doTask(cookie):
     a=cookie
