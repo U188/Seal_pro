@@ -315,8 +315,8 @@ def main():
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
     for e,cookie in enumerate(cookie_list,start=1):
         msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
-        if not getUserInfo(cookie):
-            continue
+        #if not getUserInfo(cookie):
+            #continue
         travel_sign(cookie)
         travel_collectAtuoScore(cookie)
         travel_getTaskDetail(cookie)
