@@ -274,6 +274,7 @@ def main():
         travel_sign(cookie)
         travel_collectAtuoScore(cookie)
         travel_getTaskDetail(cookie)
+        time.sleep(10)
     msg(f'\n====================开始助力=========\n')
     for e,cookie in enumerate(cookie_list,start=1):
         for f,inviteId in enumerate(inviteId_list,start=1):
