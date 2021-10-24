@@ -272,7 +272,7 @@ def main():
             for e,cookie in enumerate(cookie_list,start=1):
                 if travel_pk_getHomeData_2(cookie_list[f-1])>=5:
                     msg('跳过该账号\n')
-                    break
+                    continue
                 travel_pk_joinGroup(cookie,inviteId)
         except:
             msg('黑号吧\n')
