@@ -274,6 +274,7 @@ def main():
         #if not getUserInfo(cookie):
             #continue
         travel_getDropRedpacketDetail(cookie)
+        time.sleep(10)
     if inviteId_list:
         for f,inviteId in enumerate(inviteId_list,start=1):
             for e,cookie in enumerate(cookie_list,start=1):
