@@ -237,7 +237,7 @@ def main():
         #if not getUserInfo(cookie):
             #continue
         travel_pk_getExpandDetail(cookie)
-    
+        time.sleep(5)
     for f,inviteId in enumerate(inviteId_list,start=1):
         # try:
             for e,cookie in enumerate(cookie_list,start=1):
