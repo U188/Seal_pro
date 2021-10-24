@@ -1,4 +1,4 @@
-# 双11活动>双11随机红包助力
+# 双11活动>双11组队竞猜赢大奖
 # 入口>京东>首页
 # 脚本功能为内部邀请，内部进团,5人一团，多于5人将跳过当前团
 # 环境变量JD_COOKIE，多账号用&分割
@@ -233,7 +233,7 @@ def travel_pk_getHomeData_2(cookie):
 # 助力
 def travel_pk_joinGroup(cookie,inviteId):
     msg(f'账号 {get_pin(cookie)} 去助力{inviteId}')
-    body = { "inviteId":inviteId,"confirmFlag":"1", "ss": { "extraData": { "log": "", "sceneid": "HYJhPageh5" }, "secretp": get_secretp(cookie), "random": ''.join(random.sample(string.digits, 6)) }, "inviteId": inviteId }
+    body = { "inviteId":inviteId,"confirmFlag":"1", "ss": { "extraData": { "log": "", "sceneid": "HYJhPageh5" }, "secretp": get_secretp(cookie), "random": ''.join(random.sample(string.digits, 6)) }}
     res=taskPostUrl("travel_pk_joinGroup", body, cookie)
     if not res:
         return
@@ -249,7 +249,7 @@ def travel_pk_joinGroup(cookie,inviteId):
 
 
 def main():
-    msg('🔔双11随机红包助力，开始！\n')
+    msg('🔔双11组队竞猜赢大奖，开始！\n')
     global inviteId_list
     inviteId_list=[]
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
@@ -273,10 +273,7 @@ def main():
                 if travel_pk_getHomeData_2(cookie_list[f-1])>=5:
                     msg('跳过该账号\n')
                     break
-                if not travel_pk_joinGroup(cookie,inviteId):
-                    if not f==e:
-                        msg(f'账号{get_pin(cookie)}火爆或助力次数已耗尽，跳过该账号\n')
-                        break
+                travel_pk_joinGroup(cookie,inviteId)
         except:
             msg('黑号吧\n')
     if run_send=='yes':
@@ -285,4 +282,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
