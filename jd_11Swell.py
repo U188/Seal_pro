@@ -1,8 +1,9 @@
 # 双11活动>双11组队竞猜赢大奖膨胀金助力
 # 入口>京东>首页
-# 脚本功能为膨胀金助力
-# 环境变量JD_COOKIE，多账号用&分割
+# 脚本功能为膨胀金助力，运行即可打印助力码，将需要助力的助力码填入环境变量，即可助力
+# 环境变量JD_COOKIE，wy_swell，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
+# export wy_swell="助力码1&助力码12"
 
 import os,json,random,time,re,string
 import sys
@@ -21,6 +22,39 @@ run_send='no'     # yes或no, yes则启用通知推送服务
 cookie_match=re.compile(r'pt_key=(.+);pt_pin=(.+);')
 def get_pin(cookie):
     return cookie_match.match(cookie).group(2)
+
+# 读取环境变量
+def get_env(env):
+    try:
+        if env in os.environ:
+            a=os.environ[env]
+        elif '/ql' in os.path.abspath(os.path.dirname(__file__)):
+            try:
+                a=v4_env(env,'/ql/config/config.sh')
+            except:
+                a=eval(env)
+        elif '/jd' in os.path.abspath(os.path.dirname(__file__)):
+            try:
+                a=v4_env(env,'/jd/config/config.sh')
+            except:
+                a=eval(env)
+        else:
+            a=eval(env)
+    except:
+        a=False
+    return a
+
+# v4
+def v4_env(env,paths):
+    b=re.compile(r'(?:export )?'+env+r' ?= ?[\"\'](.*?)[\"\']', re.I)
+    with open(paths, 'r') as f:
+        for line in f.readlines():
+            try:
+                c=b.match(line).group(1)
+                break
+            except:
+                pass
+    return c 
 
 # 随机ua
 def ua():
@@ -125,7 +159,7 @@ class Msg(object):
             initialize(d)
         except:
             self.getsendNotify()
-            self.main()          
+            return self.main()          
 Msg().main()   # 初始化通知服务 
 
 
@@ -200,7 +234,7 @@ def travel_pk_getExpandDetail(cookie):
             try:
                 inviteId=res['data']['result']['inviteId']
                 msg(f"用户 {get_pin(cookie)} 的膨胀金邀请码为：{inviteId}\n")
-                inviteId_list.append(inviteId) 
+                # inviteId_list.append(inviteId) 
             except:
                 msg('找不到膨胀金邀请码，是否已选择了膨胀？\n')
         else:
@@ -230,7 +264,9 @@ def travel_pk_collectPkExpandScore(cookie,inviteId):
 def main():
     msg('🔔双11组队竞猜赢大奖膨胀金助力，开始！\n')
     global inviteId_list
-    inviteId_list=get_env('pzhb')
+    inviteId_list=get_env('wy_swell')
+    if inviteId_list:
+        inviteId_list=inviteId_list.split('&')
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
     for e,cookie in enumerate(cookie_list,start=1):
         msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
@@ -238,12 +274,14 @@ def main():
             #continue
         travel_pk_getExpandDetail(cookie)
         time.sleep(5)
-    for f,inviteId in enumerate(inviteId_list,start=1):
-        # try:
-            for e,cookie in enumerate(cookie_list,start=1):
-                travel_pk_collectPkExpandScore(cookie,inviteId)
-        # except:
-        #     msg('黑号吧\n')
+    
+    if inviteId_list:
+        for f,inviteId in enumerate(inviteId_list,start=1):
+            try:
+                for e,cookie in enumerate(cookie_list,start=1):
+                    travel_pk_collectPkExpandScore(cookie,inviteId)
+            except:
+                msg('黑号吧\n')
     if run_send=='yes':
         send('### 双11组队竞猜赢大奖膨胀金助力 ###')   # 通知服务
 
