@@ -264,7 +264,7 @@ def travel_doDropTask(cookie,inviteId):
 
 def main():
     msg('🔔也许是双11天降红包助力助力，开始！\n')
-    inviteId_list=get_env('wy_11tjhb')
+    inviteId_list=get_env('tjhb')
     if inviteId_list:
         inviteId_list=inviteId_list.split('&')
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
