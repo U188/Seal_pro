@@ -269,19 +269,20 @@ def main():
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
     for e,cookie in enumerate(cookie_list,start=1):
         msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
-        if not getUserInfo(cookie):
-            continue
+        #if not getUserInfo(cookie):
+            #continue
         travel_sign(cookie)
         travel_collectAtuoScore(cookie)
         travel_getTaskDetail(cookie)
         time.sleep(10)
     msg(f'\n====================开始助力=========\n')
-    for e,cookie in enumerate(cookie_list,start=1):
-        for f,inviteId in enumerate(inviteId_list,start=1):
+
+    for f,inviteId in enumerate(inviteId_list,start=1):
+        for e,cookie in enumerate(cookie_list,start=1):
             if not travel_collectScore(cookie,inviteId):
                 if e!=f:
                     msg(f'账号{get_pin(cookie)}火爆或助力次数已耗尽，跳过该账号\n')
-                    break
+                    continue
     if run_send=='yes':
         send('### 双11签到加内部助力 ###')   # 通知服务
 
