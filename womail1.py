@@ -6,7 +6,7 @@ import requests
 import time
 import datetime
 
-PUSH_PLUS_TOKEN = '9e3f47b7e9dc47c6b7d4966851fc597b'
+
 class WoMailCheckIn:
     def __init__(self, check_item):
         self.check_item = check_item
@@ -146,7 +146,6 @@ class WoMailCheckIn:
                 }
                 # 获取俱乐部用户信息
                 try:
-
                     url = "https://club.mail.wo.cn/clubwebservice/club-user/user-info/get-user-score-info/"
                     res = requests.get(url=url, headers=headers)
                     result = res.json()
@@ -154,7 +153,7 @@ class WoMailCheckIn:
                     userMobile = result.get("userPhoneNum")
                     userdata = f"帐号信息: {userMobile[:3]}****{userMobile[-4:]} - 当前积分:{integralTotal}\n"
                     msg += userdata
-                    
+
                     # url_params = {
                     #     "每日签到": "https://club.mail.wo.cn/clubwebservice/club-user/user-sign/create",
                     #     "参与活动": f"https://club.mail.wo.cn/clubwebservice/growth/addIntegral?phoneNum={userMobile}&resourceType=huodong",
@@ -347,7 +346,7 @@ class WoMailCheckIn:
                 res = s.post(url).json()
                 if res['success']:
                     puzzle=res['result']['puzzle']
-                    if puzzle >= 6:
+                    if puzzle == 6:
                         #抽奖
                         url='https://nyan.mail.wo.cn/cn/puzzle2/draw/draw'
                         res = s.get(url).json()
