@@ -1,6 +1,5 @@
 import requests, json, os
-
-gift_list = ['61', '62', '63', '64']
+gift_list = ['61', '62', '631', '633']
 
 
 def gift_count(n):
@@ -16,9 +15,12 @@ def main():
     global n
     n = ''
     for i in gift_list:
-        s = gift_count(i)
-        n += s
-    pushplus_bot('太太乐',f'太太乐奖品兑换：\n{n}')
+        count,name = gift_count(i)
+        s=f'{name}当前数量：{count}\n'
+        if count!=0:
+            pushplus_bot('太太乐',f'太太乐奖品兑换：\n{s}')
+        else:
+            print(f'太太乐奖品兑换：\n{s}')
 
 
 # 定义pushplus推送
