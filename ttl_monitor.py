@@ -1,3 +1,7 @@
+'''
+cron:  0 * * * * TimingCash.py
+new Env('太太乐奖品监控');
+'''
 import requests, json, os
 gift_list = ['61', '62', '631', '633']
 
