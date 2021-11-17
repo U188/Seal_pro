@@ -18,7 +18,7 @@ def main():
     for i in gift_list:
         s = gift_count(i)
         n += s
-    print(f'太太乐奖品兑换：\n{n}')
+    pushplus_bot('太太乐',f'太太乐奖品兑换：\n{n}')
 
 
 # 定义pushplus推送
