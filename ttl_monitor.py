@@ -10,7 +10,7 @@ def gift_count(n):
     url = f'https://www.ttljf.com/ttl_site/giftApi.do?giftId={n}&mthd=giftDetail&sign=1275eded3f5a2ddc5794d59d97e0a852&userId=939777'
     result = requests.get(url).text
     r = json.loads(result)
-    count = r['gifts']['giftCount']
+    count = r['gifts']['stockAmount']
     name = r['gifts']['giftName']
     return f'{name}当前数量：{count}\n'
 
