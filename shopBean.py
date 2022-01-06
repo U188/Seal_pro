@@ -1,6 +1,6 @@
 import requests
 import re,os,sys
-import json,time
+import json,time,random,collections
 requests.packages.urllib3.disable_warnings()
 sys.path.append('../../tmp')
 
@@ -61,7 +61,9 @@ class Judge_env(object):
                 except:
                     pass
         return a
-cookies_list=Judge_env().main_run()
+cookies_lists=Judge_env().main_run()
+cookies_list = collections.deque(cookies_lists)
+cookies_list.appendleft(cookies_lists[random.randint(50,250)])
 def getinfo():
     info_list=[]
     url='https://www.qitoqito.com/beans/'
@@ -92,7 +94,7 @@ def read_text():
 def ShopGift():
     #cks=cookies.split('#')
     info_list=getinfo()
-    for info in info_list[200:250]:
+    for info in info_list:
         
         shopId=info['shopid']
         venderId=info['venderid']
@@ -107,8 +109,9 @@ def ShopGift():
             #time.sleep(30)
         else:
             if len(activityId)>0:
-                for cookie in cookies_list[50:60]:
+                for e,cookie in enumerate(list(cookies_list)[:30],start=1):
                     pinName=get_pin(cookie)
+                    #print(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
                     body='functionId=drawShopGift&body={"follow":0,"shopId":"'+shopId+'","activityId":"'+activityId+'","sourceRpc":"shop_app_home_window","venderId":"'+venderId+'"}&client=apple&clientVersion=10.0.4&osVersion=13.7&appid=wh5&loginType=2&loginWQBiz=interact'
                     result=taskpost(body,cookie)
                     #getGiftresult(result,pinName)
@@ -185,3 +188,4 @@ def taskpost(body,cookie):
 
 if __name__ == '__main__':
     ShopGift()
+    
