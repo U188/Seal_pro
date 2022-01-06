@@ -3,7 +3,6 @@ import re,os,sys
 import json,time
 requests.packages.urllib3.disable_warnings()
 sys.path.append('../../tmp')
-#cookies='pt_key=app_openAAJh1jJLADCnGz9LgUs_S7pznxktTczn87ZxP5D3A9rDC2J0owDPjzIZ3fetfxI1SOXrj7VyVvM;pt_pin=jd_6cbdcc9521870;'
 
 headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
