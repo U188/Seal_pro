@@ -92,30 +92,58 @@ def read_text():
 def ShopGift():
     #cks=cookies.split('#')
     info_list=getinfo()
-    for info in info_list:
-        #print(info)
+    for info in info_list[200:250]:
+        
         shopId=info['shopid']
         venderId=info['venderid']
         activityId=info['activityid']
         name=info['name']
         #print(shopId,venderId,activityId)
+        print(f'获取到{name}店铺')
         infoo=f'"shopid":{shopId},"venderid":{venderId},"activityid":{activityId}\n'
         read=read_text()
         if infoo in read:
-            print(f'{name}已经领取了')
+            print(f'\t└{name}已经领取了')
             #time.sleep(30)
         else:
             if len(activityId)>0:
-                for cookie in cookies_list[0:50]:
+                for cookie in cookies_list[50:60]:
                     pinName=get_pin(cookie)
                     body='functionId=drawShopGift&body={"follow":0,"shopId":"'+shopId+'","activityId":"'+activityId+'","sourceRpc":"shop_app_home_window","venderId":"'+venderId+'"}&client=apple&clientVersion=10.0.4&osVersion=13.7&appid=wh5&loginType=2&loginWQBiz=interact'
                     result=taskpost(body,cookie)
-                    getGiftresult(result,pinName)
-                    #time.sleep(600)
+                    #getGiftresult(result,pinName)
+                    try:
+                        if result['isSuccess']:
+                            if result['result']:
+                                followDesc = result['result']['followDesc']
+                                giftDesc = result['result']['giftDesc']
+                                print(f"\t└账号【{pinName}】{followDesc}>{giftDesc}")
+                                if '礼包已抢完' in giftDesc or len(giftDesc)<1:
+                                    print('店铺没有奖励了，下面的ck不执行\n\n')
+                                    break
+                                if result['result']['giftCode'] == '200':
+                                    
+                                    try:
+                                        alreadyReceivedGifts = result['result']['alreadyReceivedGifts']
+                                        for g in alreadyReceivedGifts:
+                                            if g['prizeType'] == 4:
+                                                bean = g['redWord']
+                                                memoryFun(pinName, int(bean))
+                                            print(f"\t\t└获得{g['rearWord']}:{g['redWord']}")
+                                    except:
+                                        pass
+                
+                        else:
+                            print()
+                    except Exception as e:
+                        print(f"getGiftresult Error {e}")
+                
+                else:
+                    continue
                 write_text(infoo)
+                print('领取过的店铺执行写入')
             else:
                 print(f'{name}店铺没有奖励')
-
 def memoryFun(pinName,bean):
     global usergetGiftinfo
     try:
@@ -126,27 +154,7 @@ def memoryFun(pinName,bean):
             usergetGiftinfo['{}'.format(pinName)] = bean
     except Exception as e:
         print(e)
-def getGiftresult(result,pinName):
-    try:
-        if result['isSuccess']:
-            if result['result']:
-                followDesc = result['result']['followDesc']
-                giftDesc = result['result']['giftDesc']
-                print(f"\t└账号【{pinName}】{followDesc}>{giftDesc}")
-                if result['result']['giftCode'] == '200':
-                    try:
-                        alreadyReceivedGifts = result['result']['alreadyReceivedGifts']
-                        for g in alreadyReceivedGifts:
-                            if g['prizeType'] == 4:
-                                bean = g['redWord']
-                                memoryFun(pinName, int(bean))
-                            print(f"\t\t└获得{g['rearWord']}:{g['redWord']}")
-                    except:
-                        pass
-        else:
-            print()
-    except Exception as e:
-        print(f"getGiftresult Error {e}")
+
 
 
 def taskpost(body,cookie):
